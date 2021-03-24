@@ -1,8 +1,18 @@
-const shortid = require('shortid')
+const shortid = require('shortid') // The shortid library is used for generating very unique IDs
 
+// single table in this fake db
+// dogs table
+// the dog is the ID, whereas everything after are just attrs for the dog
 let dogs = [
-  { id: shortid.generate(), name: 'Captain', weight: 25, adopter_id: null },
-  { id: shortid.generate(), name: 'Doggo', weight: 13, adopter_id: null },
+  { id: shortid.generate(), name: 'Captain', weight: 25, adopter_id: null }, // row or record
+  { id: shortid.generate(), name: 'Doggo', weight: 13, adopter_id: null }, // row or record
+]
+
+// THIS IS OPTIONAL TO WRITE; FOR INSTRUCTIONAL PURPOSES TO COINCIDE WITH THE DOGS TABLE
+//adopters table
+let adopters = [
+  { id: shortid.generate(), name: "Pedro", dog_id: null }, // row or record
+  { id: shortid.generate(), name: "Amber", dog_id: null }, // row or record
 ]
 
 module.exports = {
