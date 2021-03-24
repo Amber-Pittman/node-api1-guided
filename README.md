@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-# Node API 1 Guided Project
-=======
 # Lambda Animal Shelter Web API
->>>>>>> dea0ae175dd70ea1c25a8baa55a91a215c056a24
 
 Guided project for **Node API 1** Module.
 
@@ -14,14 +10,8 @@ In this project we will learn how to create a simple Web API using `Node.js` and
 
 ## Project Setup
 
-<<<<<<< HEAD
-- [ ] **fork** and clone this repository.
-- [ ] **CD into the folder** where you cloned **your fork**.
-- [ ] type `npm install` to download dependencies.
-=======
 - [ ] Clone this repository.
 - [ ] Open the project folder in VSCode.
->>>>>>> dea0ae175dd70ea1c25a8baa55a91a215c056a24
 
 ## Assignment
 
