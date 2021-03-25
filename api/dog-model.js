@@ -10,10 +10,18 @@ let dogs = [
 
 // THIS IS OPTIONAL TO WRITE; FOR INSTRUCTIONAL PURPOSES TO COINCIDE WITH THE DOGS TABLE
 //adopters table
-let adopters = [
-  { id: shortid.generate(), name: "Pedro", dog_id: null }, // row or record
-  { id: shortid.generate(), name: "Amber", dog_id: null }, // row or record
-]
+// let adopters = [
+//   { 
+//       id: shortid.generate(), 
+//       name: "Pedro", 
+//       dog_id: null 
+//     }, // row or record
+//   { 
+//       id: shortid.generate(), 
+//       name: "Amber", 
+//       dog_id: null 
+//     }, // row or record
+// ]
 
 module.exports = {
   findAll() {
