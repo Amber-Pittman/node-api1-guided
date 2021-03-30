@@ -56,19 +56,6 @@ server.get("/api/dogs/:id", (req, res) => {
         })
 })
 
-// Dog.findById(id)
-//         .then(dogs => {
-//             console.log(dogs.id)
-//             res.status(200).json({
-//                     message: "getting by ID",
-//                     dogs
-//                 })
-//         })
-//         .catch(err => {
-//             res.status(500).json({
-//                 message: err.message
-//             })
-//         })
 
 // [GET] /api/dogs (R of CRUD, fetch all dogs)
 server.get("/api/dogs", (req, res) => {
@@ -89,10 +76,87 @@ server.get("/api/dogs", (req, res) => {
 
 
 // [POST] /api/dogs (C of CRUD, create new dog from JSON payload)
+server.post("/api/dogs", (req, res) => {
+    //payload ** pull any info you need from req
+    const newDog = req.body
+    //console.log(newDog)
+    if(!newDog.name || !newDog.weight) { // validate req things if needed
+        // send an appropriate response BUT ONLY ONCE
+        res.status(422).json({
+            message: "name and weight are required"
+        })
+    } else {
+        Dog.create(newDog)
+            .then(dog => {
+                // send an appropriate response BUT ONLY ONCE
+                //throw new Error("you done messed up A-A-Ron!")
+                console.log(dog)
+                res.status(201).json(dog)
+            })
+            .catch(err => {
+                // send an appropriate response BUT ONLY ONCE
+                res.status(500).json({ message: err.message})
+            })
+    }
+})
+
 
 // [PUT] /api/dogs/:id (U of CRUD, update dog with :id using JSON payload)
+server.put("/api/dogs/:id", async (req, res) => {
+    // destructure the id
+    const { id } = req.params
+    const changes = req.body
+
+    try {
+        if(!changes.name || !changes.weight) { 
+            res.status(422).json({
+                message: "name and weight are required"
+            })
+        } else {
+            const updatedDog = await Dog.update(id, changes)
+            console.log("Updated Dog: ", updatedDog)
+            
+            if (!updatedDog) {
+                res.status(404).json({
+                    message: "that dog does not exist in the database"
+                })
+            } else {
+                res.status(200).json(updatedDog)
+            }
+        }
+    } catch(err) {
+        res.status(500).json({ message: err.message})
+    }
+})
+
+/* HOW DO WE CONSTRUCT A PUT REQUEST??? 
+1. Get the ID of the Dog
+2. Add the ID to the end of the URL
+    * For example: http://localhost:9000/api/dogs/q7Znk1llf
+3. In the PUT request, switch to BODY
+    * RAW
+    * JSON
+4. Add the params required (in our case, name and weight)
+    * Name is customary with PUT requests
+*/
 
 // [DELETE] /api/dogs/:id (D of CRUD, remove dog with :id)
+
+server.delete("/api/dogs/:id", async (req, res) => {
+    try {
+        //throw new Error("Something died trying to delete")
+        const deleted = await Dog.delete(req.params.id) // without req.params.id, it will be buggy because you need an id to delete the object
+        if(!deleted) {
+            res.status(404).json({
+                message: "that dog does not exist in the database"
+            })
+        } else {
+            res.status(204).json(deleted)
+        }
+    } catch(err) {
+        res.status(500).json({ message: err.message})
+    }
+})
 
 // // [GET] / (Hello World endpoint)
 // // "CATCH ALL" 
